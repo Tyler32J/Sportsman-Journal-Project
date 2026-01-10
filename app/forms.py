@@ -5,13 +5,13 @@ from .models import Location, Trip, Harvested
 
 class LocationForm(forms.ModelForm):
     class Meta:
-        model = Location
+        models = Location
         fields = ['name', 'state', 'city', 'county']
 
 
 class TripForm(forms.ModelForm):
     class Meta:
-        model = Trip
+        models = Trip
         fields = ['location', 'trip_date', 'notes']
 
 

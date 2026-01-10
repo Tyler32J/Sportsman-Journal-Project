@@ -13,18 +13,36 @@
     <header class = "header_container">
         <h1 class="Sportsman_journal">Sportsman's Journal</h1>
         <nav class="">
-                <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'Login_sign_up' %}">Login</a>
+                {% comment %} <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'Login_sign_up' %}">Login</a> {% endcomment %}
         </nav>
     </header>
  
     <main>
         {% block content %}
-            <h1 class="">THIS IS THE HOME PAGE</h1>
+            <h1 class="">Welcome, {{user}}</h1>
             <p class="">Add your Home Page stuff here</p>
             
             <button class=""><a href="{% url 'home' %}">Home</a></button>
             <button class=""><a href="{% url 'Login_sign_up' %}">Login</a></button>
+    
+            <div class="card-container">
+                <a href="{% url 'hunting' %}" class="card hunting_card">
+                    <span>Hunting</span>
+                </a>
+
+                <a href="{% url 'fishing' %}" class="card fishing_card">
+                    <span>Fishing</span>
+                </a>
+
+                <a href="{% url 'post' %}" class="card post_card">
+                    <span>Post</span>
+                </a>
+            </div>
+
+            <div class="about"> 
+                <h2>About The Wedsite</h2>
+            </div>
         {% endblock %}
     </main>
  

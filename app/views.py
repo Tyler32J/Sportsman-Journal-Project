@@ -47,6 +47,19 @@ def home_page(request):
     return render(request, "base.html")
 
 
+def hunting_page(request):
+    return render(request, "hunting.html")
+
+
+def fishing_page(request):
+    return render(request, "fishing.html")
+
+
+def post_page(request):
+    return render(request, "post.html")
+
+
+
 
 
 
