@@ -13,6 +13,11 @@
     <header class = "header_container">
         <h1 class="Sportsman_journal">Sportsman's Journal</h1>
         <nav class="">
+            {% comment %} <a href="#about"><button>About Me</button></a>
+            <a href="#skills"><button>Skills</button></a>
+            <a href="#projects"><button>Projects</button></a>
+            <a href="#resume"><button>Resume</button></a>
+            <a href="#contact"><button>Contact Me</button></a> {% endcomment %}
                 {% comment %} <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'Login_sign_up' %}">Login</a> {% endcomment %}
         </nav>
@@ -35,8 +40,8 @@
                     <span>Fishing</span>
                 </a>
 
-                <a href="{% url 'post' %}" class="card post_card">
-                    <span>Post</span>
+                <a href="{% url 'photo' %}" class="card photo_card">
+                    <span>Photos</span>
                 </a>
             </div>
 

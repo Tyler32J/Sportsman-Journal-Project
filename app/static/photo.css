@@ -1,0 +1,35 @@
+body {
+    background-color: rgba(27, 31, 34, 0.85);
+}
+
+h1 {
+    font-size: 2.1rem;
+    line-height: 1.4;
+    letter-spacing: 0.5rem;
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+}
+
+.slideshow {
+    margin-top: 10%;
+    width: 70%;
+    height: 60%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("images/WhiteTail-Deer.png");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 1px 2px 10px 5px white;
+    animation: slider 9s infinite linear;
+}
+
+@keyframes slider{
+    0%{ background-image: url("images/tyler_10_point_buck.jpg"); }
+    33%{ background-image: url("images/tyler_32_redfish.jpg"); }
+    50%{ background-image: url("images/brad_catfish.jpg");}
+    33%{ background-image: url("images/Cameraman.png");}
+}
+

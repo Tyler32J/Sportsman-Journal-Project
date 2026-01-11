@@ -29,3 +29,9 @@ class Harvested(models.Model):
     species = models.ForeignKey(Species, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
 
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    date = models.DateField()
+    picture = models.ImageField(upload_to="images/")

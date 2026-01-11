@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Photo Gallery{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'photo.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Sportsman's Journal Photo Gallery!</h1>
+
+    <div class="slideshow"></div>
+
+    {% for post in posts %}
+        <img src="{{ post.picture.url }}" width="300">
+    {% empty %}
+        <p>No photos uploaded yet.</p>
+    {% endfor %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}
+Create Your Post!
+{% endblock %}
+
+{% block content %}
+<h1>Hunters and fishermen all over the United States showing over the biggest game and catches!</h1>
+<p>This website is built with Django.</p>
+{% endblock %} {% endcomment %}
+{% comment %} 
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body{
+            background-color: rgba(27,31,34,0.85);
+        }
+        h1{
+            font-size: 2.1rem;
+            Line-height:1.4;
+            Letter-spacing: 0.5rem;
+            text-align: center;
+            color:white;
+            margin-top: 50px;
+        }
+
+        .manindiv{
+            width: 70%;
+            height: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50% 50%);
+            background-image:url("");
+            background-size: 100% 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <h1> Sportsman's Journal Photo Gallery!</h1>
+</div class="maindiv">
+
+
+</div>
+
+
+</body>
+</html> {% endcomment %}

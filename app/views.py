@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .forms import PostForm
+from .models import Post
+# from .forms import SignupForm
 
 
 
@@ -55,8 +59,33 @@ def fishing_page(request):
     return render(request, "fishing.html")
 
 
-def post_page(request):
-    return render(request, "post.html")
+def photo_page(request):
+    return render(request, "photo.html")
+
+def create_post(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+
+            
+            return redirect("photo")
+
+    
+    else:
+        form = PostForm()
+
+    
+    return render(request, "create_post.html", {"form": form})
+
+
+@login_required
+def photo_page(request):
+    posts = Post.objects.filter(user=request.user)
+    return render(request, "photo.html", {"posts": posts})
 
 
 
