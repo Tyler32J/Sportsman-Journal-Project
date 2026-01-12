@@ -3,10 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import PostForm
-from .models import Post
-# from .forms import SignupForm
-
+from .forms import *
+from .models import *
 
 
 def login_signup(request):
@@ -50,17 +48,53 @@ def login_signup(request):
 def home_page(request):
     return render(request, "base.html")
 
-
+@login_required
 def hunting_page(request):
-    return render(request, "hunting.html")
+    hunting = Hunting.objects.filter(user=request.user)
+    return render(request, "hunting.html", {"hunting": hunting})
 
+def hunting_log(request):
+    if request.method == "POST":
+        form = HuntingForm(request.POST, request.FILES)
 
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+
+            
+            return redirect("hunting")
+
+    
+    else:
+        form = HuntingForm()
+
+    
+    return render(request, "loghunt.html", {"form": form})
+
+@login_required
 def fishing_page(request):
-    return render(request, "fishing.html")
+    fishing = Fishing.objects.filter(user=request.user)
+    return render(request, "fishing.html", {"fishing": fishing})
 
+def fishing_log(request):
+    if request.method == "POST":
+        form = FishingForm(request.POST, request.FILES)
 
-def photo_page(request):
-    return render(request, "photo.html")
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+
+            
+            return redirect("fishing")
+
+    
+    else:
+        form = FishingForm()
+
+    
+    return render(request, "logfish.html", {"form": form})
 
 def create_post(request):
     if request.method == "POST":
@@ -81,10 +115,9 @@ def create_post(request):
     
     return render(request, "create_post.html", {"form": form})
 
-
 @login_required
 def photo_page(request):
-    posts = Post.objects.filter(user=request.user)
+    posts = Post.objects.all().order_by('-date')
     return render(request, "photo.html", {"posts": posts})
 
 

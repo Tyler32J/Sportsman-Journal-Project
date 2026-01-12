@@ -28,7 +28,9 @@ urlpatterns = [
     path("fishing/", fishing_page, name="fishing"),
     path("photo/", photo_page, name="photo"),
     path("post/", create_post, name="post"),
-    # path("user_post", user_post, name="user_post"),
+    path("hunting_log/", hunting_log, name="loghunt" ),
+    path("fishing_log/", fishing_log, name="logfish" ),
+    
 ] 
 
 if settings.DEBUG:

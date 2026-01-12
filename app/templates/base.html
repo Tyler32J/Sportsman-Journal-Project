@@ -13,11 +13,14 @@
     <header class = "header_container">
         <h1 class="Sportsman_journal">Sportsman's Journal</h1>
         <nav class="">
-            {% comment %} <a href="#about"><button>About Me</button></a>
-            <a href="#skills"><button>Skills</button></a>
-            <a href="#projects"><button>Projects</button></a>
-            <a href="#resume"><button>Resume</button></a>
-            <a href="#contact"><button>Contact Me</button></a> {% endcomment %}
+            
+            <button class=""><a href="{% url 'home' %}">Home</a></button>
+            <button class=""><a href="{% url 'Login_sign_up' %}">Logout</a></button>
+            {% comment %} <a href="#"><button></button></a>
+            <a href="#hunts"><button>Hunts</button></a>
+            <a href="#"><button></button></a>
+            <a href="#"><button></button></a>
+            <a href="#"><button></button></a> {% endcomment %}
                 {% comment %} <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'Login_sign_up' %}">Login</a> {% endcomment %}
         </nav>
@@ -27,9 +30,9 @@
         {% block content %}
             <h1 class="">Welcome, {{user}}</h1>
             <p class="">Add your Home Page stuff here</p>
-            
+{% comment %}             
             <button class=""><a href="{% url 'home' %}">Home</a></button>
-            <button class=""><a href="{% url 'Login_sign_up' %}">Login</a></button>
+            <button class=""><a href="{% url 'Login_sign_up' %}">Login</a></button> {% endcomment %}
     
             <div class="card-container">
                 <a href="{% url 'hunting' %}" class="card hunting_card">

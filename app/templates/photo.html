@@ -10,11 +10,26 @@
 
 {% block content %}
     <h1>Sportsman's Journal Photo Gallery!</h1>
+    <button class=""><a href="{% url 'post' %}">Create A Post</a></button>
+    {% comment %} <button class=""><a href="{% url 'post' %}">View Gallery</a></button>
+     {% endcomment %}
 
     <div class="slideshow"></div>
 
     {% for post in posts %}
-        <img src="{{ post.picture.url }}" width="300">
+
+        <div class= "post_card">
+            <h1> {{post.title}} </h1>
+            <p> {{post.location}} </p>
+            <p> {{post.date}} </p>
+            <p> {{post.hunting_choices}} </p>
+            <p> {{post.fishing_choices}} </p>
+            <p> {{post.fishing_zone_choices}} </p>
+            <img src="{{ post.picture.url }}" width="300">
+            <p> {{post.description}} </p>
+            <h3> {{post.user}} </h3>
+        </div>
+    
     {% empty %}
         <p>No photos uploaded yet.</p>
     {% endfor %}

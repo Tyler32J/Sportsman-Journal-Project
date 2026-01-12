@@ -2,7 +2,7 @@ from django import forms
 from.models import Post
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Location, Trip, Harvested
+from .models import *
 
 class LocationForm(forms.ModelForm):
     class Meta:
@@ -30,9 +30,26 @@ class SignupForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['location', 'title', 'date', 'picture']
+        fields = ['location', 'title', 'date', 'picture', 'description', 'hunting_choices', 'fishing_choices','fishing_zone_choices']
 
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
         }
 
+class HuntingForm(forms.ModelForm):
+    class Meta:
+        model = Hunting
+        fields = ['location', 'title', 'date', 'picture', 'description', 'hunting_log_choices']
+
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+class FishingForm(forms.ModelForm):
+    class Meta:
+        model = Fishing
+        fields = ['location', 'title', 'date', 'picture', 'description', 'fishing_log_choices','fishing_zone_choices']
+
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+        }
