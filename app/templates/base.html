@@ -15,7 +15,8 @@
         <nav class="">
             
             <button class=""><a href="{% url 'home' %}">Home</a></button>
-            <button class=""><a href="{% url 'Login_sign_up' %}">Logout</a></button>
+            <button class=""><a href="{% url 'logout' %}">Logout</a></button>
+            <button class=""><a href="{% url 'admin:index' %}">Settings</a></button>
             {% comment %} <a href="#"><button></button></a>
             <a href="#hunts"><button>Hunts</button></a>
             <a href="#"><button></button></a>
@@ -25,6 +26,15 @@
                 <a href="{% url 'Login_sign_up' %}">Login</a> {% endcomment %}
         </nav>
     </header>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
  
     <main>
         {% block content %}

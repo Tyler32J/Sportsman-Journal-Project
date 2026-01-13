@@ -2,32 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
-class Species(models.Model):
-    name_of_species = models.CharField(max_length=50)
-    species_type = models.CharField(
-        max_length=20, 
-        choices = [('Fishing', 'Fishing'), ('Hunting', 'Hunting')]
-    )
-
-class Location(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE) 
-    name = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    county = models.CharField(max_length=50)
-
-class Trip(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
-    trip_date = models.DateField()
-    notes = models.TextField(blank=True)
-
-
-class Harvested(models.Model):
-    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
-    species = models.ForeignKey(Species, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=0)
+# # Create your models here.
 
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -35,7 +10,8 @@ class Post(models.Model):
     title = models.CharField(max_length=25)
     date = models.DateField()
     picture = models.ImageField(upload_to="images/")
-    description = models.CharField(max_length=25, default='No description yet')
+    description = models.CharField(max_length=25, blank=True)
+    quantity = models.PositiveIntegerField(default=0)
 
     GAME_CHOICES = [
     ('none','None'),
@@ -64,7 +40,7 @@ class Post(models.Model):
 
     hunting_choices = models.CharField( max_length=50,
         choices=GAME_CHOICES,
-        default='draft')
+        default='none')
     
     FISH_CHOICES = [
     ('none','None'),
@@ -124,19 +100,18 @@ class Post(models.Model):
 
     fishing_choices = models.CharField( max_length=50,
         choices=FISH_CHOICES,
-        default='draft')
+        default='None')
     
     FISH_ZONE_CHOICES = [
     ('none','None'),
     ('freshwater', 'Freshwater'),
     ('coastal', 'Coastal Saltwater'),
     ('offshore', 'Offshore / Deep Sea'),
-    ('shark', 'Shark'),
     ]
 
     fishing_zone_choices = models.CharField( max_length=50,
         choices=FISH_ZONE_CHOICES,
-        default='draft')
+        default='None')
     
 class Hunting(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -144,8 +119,8 @@ class Hunting(models.Model):
     title = models.CharField(max_length=25)
     date = models.DateField()
     picture = models.ImageField(upload_to="images/")
-    description = models.CharField(max_length=25, default='No description yet')
-
+    description = models.CharField(max_length=25, blank=True)
+    quantity = models.PositiveIntegerField(default=0)
     
     GAME_CHOICES = [
     ('none','None'),
@@ -174,7 +149,7 @@ class Hunting(models.Model):
 
     hunting_log_choices = models.CharField( max_length=50,
         choices=GAME_CHOICES,
-        default='draft')
+        default='none')
     
     
 class Fishing(models.Model):
@@ -183,7 +158,8 @@ class Fishing(models.Model):
     title = models.CharField(max_length=25)
     date = models.DateField()
     picture = models.ImageField(upload_to="images/")
-    description = models.CharField(max_length=25, default='No description yet')
+    description = models.CharField(max_length=25, blank=True)
+    quantity = models.PositiveIntegerField(default=0)
 
     FISH_CHOICES = [
     ('none','None'),
@@ -243,16 +219,15 @@ class Fishing(models.Model):
 
     fishing_log_choices = models.CharField( max_length=50,
         choices=FISH_CHOICES,
-        default='draft')
+        default='none')
     
     FISH_ZONE_CHOICES = [
     ('none','None'),
     ('freshwater', 'Freshwater'),
     ('coastal', 'Coastal Saltwater'),
     ('offshore', 'Offshore / Deep Sea'),
-    ('shark', 'Shark'),
     ]
 
     fishing_zone_choices = models.CharField( max_length=50,
         choices=FISH_ZONE_CHOICES,
-        default='draft')
+        default='none')

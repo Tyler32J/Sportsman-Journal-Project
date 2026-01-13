@@ -22,17 +22,45 @@
             <h1> {{post.title}} </h1>
             <p> {{post.location}} </p>
             <p> {{post.date}} </p>
-            <p> {{post.hunting_choices}} </p>
-            <p> {{post.fishing_choices}} </p>
-            <p> {{post.fishing_zone_choices}} </p>
+            {% if post.hunting_choices != "none" %}
+                <p>{{ post.get_hunting_choices_display }}</p>
+            {% endif %}
+
+            {% if post.fishing_choices != "none" %}
+                <p>{{ post.get_fishing_choices_display }}</p>
+                <p>{{ post.get_fishing_zone_choices_display }}</p>
+            {% endif %}
+            <p>{{post.quantity}}</p>
             <img src="{{ post.picture.url }}" width="300">
             <p> {{post.description}} </p>
             <h3> {{post.user}} </h3>
+
+            <a href="{% url 'edit_post' post.id %}">
+                <button id="edit">Edit</button>
+            </a>
+            <form method="POST" action="{% url 'delete_post' post.id %}">
+                {% csrf_token %}
+                <button type="submit"
+                    onclick="return confirm('Are you sure you want to delete this post?');">
+                    Delete
+                </button>
+            </form>
         </div>
+        
     
     {% empty %}
         <p>No photos uploaded yet.</p>
     {% endfor %}
+
+    <script>
+        function switchToEdit() {
+            const title = document.getElementById("edit");
+            title.textContent = title.textContent === "Create" ? "Edit" : "Create";
+        }
+    </script>
+
+    
+
 {% endblock %}
 
 

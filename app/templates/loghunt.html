@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Create Hunting Log</h2>
+    <h2>
+        {% if form.instance.pk %}
+            Edit Hunting Log
+        {% else %}
+            Create Hunting Log
+        {% endif %}
+    </h2>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}

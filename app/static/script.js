@@ -1,7 +1,8 @@
 const wrapper = document.querySelector('.wrapper');
 const registerLink = document.querySelector('.register-link');
 const loginLink = document.querySelector('.login-link');
-const error = document.querySelector(".error-message")
+const error = document.querySelector(".error-message");
+
 
 function clearError() {
     if (error) {
