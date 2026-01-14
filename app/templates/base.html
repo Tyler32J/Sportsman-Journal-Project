@@ -16,12 +16,34 @@
         <nav class="main-nav">
             
             <button class=""><a href="{% url 'home' %}">Home</a></button>
-            <button class=""><a href="{% url 'hunting' %}">Hunting Log</a></button>
-            <button class=""><a href="{% url 'fishing' %}">Fishing Log</a></button>
-            <button class=""><a href="{% url 'photo' %}">Photo Gallery</a></button>
+
+        <select onchange="if (this.value) window.location.href=this.value;">
+
+            {% if request.resolver_match.url_name != 'hunting' and request.resolver_match.url_name != 'fishing' %}
+                <option value="" selected>Logs</option>
+            {% endif %}
+
+            <option
+                value="{% url 'hunting' %}"
+                {% if request.resolver_match.url_name == 'hunting' %}selected{% endif %}
+            >
+                Hunting Log
+            </option>
+
+            <option
+    
+                value="{% url 'fishing' %}"
+                {% if request.resolver_match.url_name == 'fishing' %}selected{% endif %}
+            >
+                Fishing Log
+            </option>
+            {% comment %} <option value="{% url 'hunting' %}">Hunting Log</option>
+            <option value="{% url 'fishing' %}">Fishing Log</option> {% endcomment %}
+        </select>
+
+            <button class=""><a href="{% url 'photo' %}">Photo Gallery</a>
             <button class=""><a href="{% url 'logout' %}">Logout</a></button>
             <button class=""><a href="{% url 'admin:index' %}">Settings</a></button>
-            
         </nav>
     </header>
 
