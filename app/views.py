@@ -6,7 +6,7 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 
-@login_required
+# @login_required
 def login_signup(request):
     if request.method == "POST":
         form_type = request.POST.get("form_type")

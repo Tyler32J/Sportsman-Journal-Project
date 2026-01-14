@@ -7,23 +7,21 @@
     <title>{% block title %}Sportsman's Journal{% endblock %}</title>
     {% block css %}
         <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Inter&family=Merriweather&display=swap" rel="stylesheet">
     {% endblock %}  
 </head>
 <body>
     <header class = "header_container">
         <h1 class="Sportsman_journal">Sportsman's Journal</h1>
-        <nav class="">
+        <nav class="main-nav">
             
             <button class=""><a href="{% url 'home' %}">Home</a></button>
+            <button class=""><a href="{% url 'hunting' %}">Hunting Log</a></button>
+            <button class=""><a href="{% url 'fishing' %}">Fishing Log</a></button>
+            <button class=""><a href="{% url 'photo' %}">Photo Gallery</a></button>
             <button class=""><a href="{% url 'logout' %}">Logout</a></button>
             <button class=""><a href="{% url 'admin:index' %}">Settings</a></button>
-            {% comment %} <a href="#"><button></button></a>
-            <a href="#hunts"><button>Hunts</button></a>
-            <a href="#"><button></button></a>
-            <a href="#"><button></button></a>
-            <a href="#"><button></button></a> {% endcomment %}
-                {% comment %} <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'Login_sign_up' %}">Login</a> {% endcomment %}
+            
         </nav>
     </header>
 
@@ -38,12 +36,17 @@
  
     <main>
         {% block content %}
-            <h1 class="">Welcome, {{user}}</h1>
-            <p class="">Add your Home Page stuff here</p>
-{% comment %}             
-            <button class=""><a href="{% url 'home' %}">Home</a></button>
-            <button class=""><a href="{% url 'Login_sign_up' %}">Login</a></button> {% endcomment %}
-    
+
+            <section class="hero">
+                <div class="hero-overlay">
+                    <h1>Welcome back, {{ user.username }}</h1>
+                    <p>
+                    Track your hunts, log your fishing trips,
+                    and preserve your outdoor experiences.
+                </p>
+                </div>
+            </section>
+
             <div class="card-container">
                 <a href="{% url 'hunting' %}" class="card hunting_card">
                     <span>Hunting</span>
@@ -58,9 +61,30 @@
                 </a>
             </div>
 
-            <div class="about"> 
-                <h2>About The Wedsite</h2>
-            </div>
+            <section class="stats">
+                <div>
+                    <h2></h2>
+                    <p>Hunts Logged</p>
+                </div>
+                <div>
+                    <h2></h2>
+                    <p>Fish Caught</p>
+                </div>
+                <div>
+                    <h2></h2>
+                    <p>Photos Uploaded</p>
+                </div>
+            </section>
+            
+            <section class="about-section">
+                <div class="about-overlay">
+                        <h2>About The Website</h2>
+                        <p>
+                            Sportsman’s Journal is a personal field log designed
+                            for hunters and anglers 
+                        </p>
+                    </div>
+                </section>
         {% endblock %}
     </main>
  
