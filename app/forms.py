@@ -19,14 +19,16 @@ class PostForm(forms.ModelForm):
             "description": forms.TextInput(
                 attrs={"placeholder": "No description yet", 'value': '' }
             ),
-        }
-        
+        } 
+       
     def clean(self):
         cleaned_data = super().clean()
 
         hunting = cleaned_data.get('hunting_choices')
         fishing = cleaned_data.get('fishing_choices')
         zone = cleaned_data.get('fishing_zone_choices')
+        # hunting_post = cleaned_data.get('create_hunting_post')
+        # fishing_post = cleaned_data.get('create_fishing_post')
 
         hunting_selected = hunting and hunting != 'none'
 
@@ -45,7 +47,6 @@ class PostForm(forms.ModelForm):
                 raise forms.ValidationError(
                     "Fishing logs require both a fish and a fishing zone."
                 )
-
         return cleaned_data
 
 class HuntingForm(forms.ModelForm):

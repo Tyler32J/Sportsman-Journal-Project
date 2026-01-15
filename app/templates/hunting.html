@@ -4,15 +4,13 @@
 {% block title %} Hunting Log{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link rel="stylesheet" href="{% static 'photo.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="stylesheet" href="{% static 'slideshow.css' %}">
 {% endblock %}
 
 {% block content %}
     <h1>!</h1>
     <button class=""><a href="{% url 'loghunt' %}">Create Hunt Log</a></button>
-    {% comment %} <button class=""><a href="{% url 'post' %}">View Gallery</a></button>
-     {% endcomment %}
 
     {% for hunt in hunting %}
 

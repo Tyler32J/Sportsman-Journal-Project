@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #121212;
+    color: #fff;
+    line-height: 1.6;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("images/dark_woods.png") ;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.header_container {
+    background: rgba(10,10,10,0.9);
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.header_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 6rem;
+}
+
+.Sportsman_journal {
+    font-family: "Merriweather", serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    /* letter-spacing: 1px; */
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #e6e6e6;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+/* .main-nav button {
+    background: none;
+    color: #e6e6e6;
+    font-size: 0.95rem;
+} */
+
+.main-nav a:hover {
+    color: #c49a5a;
+}
+
+.hero {
+    height: 90vh;
+    background-image: url("images/dark_river.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.hero-overlay {
+position: absolute;
+inset: 0;
+background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.85)
+);
+display: flex;
+flex-direction: column;
+justify-content: center;
+padding-left: 10rem;
+}
+
+.hero h1 {
+    font-family: "Merriweather", serif;
+    font-size: 3.8rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 620px;
+    opacity: 0.9;
+    color: #fff;
+}
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: -120px;
+    padding-bottom: 6rem;
+}
+.card {
+    width: 320px;
+    height: 420px;
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.2)
+    );
+    border-radius: 16px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.card span {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.card small {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.hunting_card {
+    background-image: url("images/WhiteTail-Deer.png");
+}
+
+.fishing_card {
+    background-image: url("images/Bass.png");
+}
+
+.photo_card {
+    background-image: url("images/Cameraman.png");
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 5rem 8rem;
+    background: rgba(15,15,15,0.95);
+    text-align: center;
+}
+
+.stats h2 {
+    font-family: "Merriweather", serif;
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.stats p {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.about-section {
+    background-image: url("images/dark_woods.png");
+    background-size: cover;
+    background-position: center;
+    padding: 7rem 0;
+}
+
+.about-overlay {
+    max-width: 800px;
+    margin-left: 6rem;
+    padding: 3rem;
+    background: rgba(20,20,20,0.7);
+}
+
+.about-overlay h2 {
+    font-family: "Merriweather", serif;
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+.about-overlay p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+
