@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% if edit %}Edit Fishing Log{% else %}Create Fishing Log{% endif %}
+{% endblock %}
+
+{% block css %} <link rel="stylesheet" href="{% static 'home.css' %}"> <link rel="stylesheet" href="{% static 'logfish.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="gallery-wrapper">
+
+```
+<h1>
+    {% if edit %}Edit Fishing Log{% else %}New Fishing Log{% endif %}
+</h1>
+
+<form method="POST" enctype="multipart/form-data" class="log-form">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <div class="form-group">
+        <label>Title</label>
+        {{ form.title }}
+    </div>
+
+    <div class="form-group">
+        <label>Location</label>
+        {{ form.location }}
+    </div>
+
+    <div class="form-group">
+        <label>Date</label>
+        {{ form.date }}
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        {{ form.description }}
+    </div>
+
+    <div class="form-group">
+        <label>Quantity</label>
+        {{ form.quantity }}
+    </div>
+
+    <div class="form-group">
+        <label>Fish</label>
+        {{ form.fishing_log_choices }}
+    </div>
+
+    <div class="form-group">
+        <label>Fishing Zone</label>
+        {{ form.fishing_zone_choices }}
+    </div>
+
+    <div class="form-group">
+        <label>Image</label>
+        {{ form.picture }}
+    </div>
+
+    <button type="submit" class="create-log-btn">
+        {% if edit %}Save Changes{% else %}Create Log{% endif %}
+    </button>
+</form>
+```
+
+</div>
+{% endblock %}

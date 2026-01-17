@@ -1,45 +1,103 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Fishing Log{% endblock %}
+{% block title %}Fishing Log{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'home.css' %}">
-    <link rel="stylesheet" href="{% static 'slideshow.css' %}">
+    <link rel="stylesheet" href="{% static 'logfish.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>!</h1>
-    <button class=""><a href="{% url 'logfish' %}">Create Fishing Log</a></button>
 
-    {% for fish in fishing %}
+    <div class="gallery-wrapper">
 
-        <div class= "post_card">
-            <h1>{{fish.title}}</h1>
-            <p>{{fish.location}}</p>
-            <p>{{fish.date}}</p>
-            <p>{{fish.get_fishing_log_choices_display}}</p>
-            <p>{{fish.get_fishing_zone_choices_display}}</p>
-            <p>{{fish.quantity}}</p>
-            <img src="{{ fish.picture.url }}" width="300">
-            <p>{{fish.description}}</p>
-            
-             <a href="{% url 'edit_fish' fish.id %}">
-                <button>Edit</button>
-            </a>
+        <div class="gallery-top">
 
-            <form method="POST" action="{% url 'delete_fish' fish.id %}">
-                {% csrf_token %}
-                <button type="submit"
-                    onclick="return confirm('Are you sure you want to delete this fishing log?');">
-                    Delete
-                </button>
-            </form>
+            <div class="gallery-info">
+                <h1>Fishing Log</h1>
+                <p>
+                Review and manage your Fishing logs.
+                    Each card represents a recorded fishing trip..
+                </p>
+
+                <a href="{% url 'logfish' %}" class="create-log-btn">
+                    Create Fishing Log
+                </a>
+            </div>
+
+            {% if fishing %}
+            <div class="gallery-feature">
+                <img src="{{ fishing.0.picture.url }}">
+                <div class="feature-overlay">
+                    <strong>{{ fishing.0.title }}</strong><br>
+                    {{ fishing.0.location }}
+                </div>
+            </div>
+            {% endif %}
 
         </div>
-    
-    {% empty %}
-        <p>No photos uploaded yet.</p>
-    {% endfor %}
-{% endblock %}
 
+        <div class="gallery-grid">
+
+            {% for fish in fishing %}
+
+            <div class="gallery-card">
+
+                {% if fish.picture %}
+                    <div class="card-image"
+                        onclick="openLogModal(
+                            '{{ fish.title|escapejs }}',
+                            '{{ fish.location|escapejs }}',
+                            '{{ fish.date }}',
+                            '{{ fish.get_fishing_log_choices_display }}',
+                            '{{ fish.zone }}',
+                            '{{ fish.picture.url }}'
+                        )">
+                        <img src="{{ fish.picture.url }}">
+                    </div>
+                {% endif %}
+
+                <div class="card-overlay">
+                    <strong>{{ fish.title }}</strong><br>
+                    {{ fish.location }}<br>
+                    {{ fish.get_fishing_log_choices_display }}<br>
+                    {{ fish.date }}
+                </div>
+
+                <div class="card-actions">
+                    <a href="{% url 'edit_fish' fish.id %}" class="edit-btn">
+                        Edit
+                    </a>
+                    <form method="POST" action="{% url 'delete_fish' fish.id %}">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="delete-btn"
+                                onclick="return confirm('Are you sure you want to delete this log?');">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        {% empty %}
+            <p>No fishing logs yet.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+<div id="logModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeLogModal()">&times;</span>
+
+        <img id="modalImage" class="modal-image">
+
+        <h2 id="modalTitle"></h2>
+        <p id="modalLocation"></p>
+        <p id="modalType"></p>
+        <p id="modalDate"></p>
+    </div>
+</div>
+<script src="{% static 'script.js' %}"></script>
+{% endblock %}

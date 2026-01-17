@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Post{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+<link rel="stylesheet" href="{% static 'admin_page.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-container">
+
+    <h1>Edit Post</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" value="{{ post.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" name="location" value="{{ post.location }}">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description" required>{{ post.description }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" name="quantity" value="{{ post.quantity }}">
+        </div>
+
+        {% if post.picture %}
+            <div class="current-image">
+                <p>Current Image:</p>
+                <img src="{{ post.picture.url }}" width="200">
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="picture">
+        </div>
+
+        <button type="submit" class="admin-btn edit">
+            Save Changes
+        </button>
+
+        <a href="{% url 'admin_dashboard' %}" class="admin-btn">
+            Cancel
+        </a>
+    </form>
+
+</div>
+
+{% endblock %}

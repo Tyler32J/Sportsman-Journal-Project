@@ -37,7 +37,6 @@ body::before {
     font-family: "Merriweather", serif;
     font-size: 1.8rem;
     font-weight: 400;
-    /* letter-spacing: 1px; */
 }
 
 .main-nav {
@@ -52,12 +51,6 @@ body::before {
     font-size: 0.95rem;
     transition: color 0.2s ease;
 }
-
-/* .main-nav button {
-    background: none;
-    color: #e6e6e6;
-    font-size: 0.95rem;
-} */
 
 .main-nav a:hover {
     color: #c49a5a;
@@ -180,6 +173,7 @@ padding-left: 10rem;
     font-family: "Merriweather", serif;
     font-size: 3rem;
     font-weight: 400;
+    color: #c49a5a;
 }
 
 .stats p {
@@ -214,5 +208,3 @@ padding-left: 10rem;
     line-height: 1.8;
     opacity: 0.9;
 }
-
-

@@ -1,0 +1,155 @@
+.gallery-wrapper {
+    padding: 60px;
+    color: #e6e1d6;
+    font-family: 'Merriweather', serif;
+}
+
+.gallery-top {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    gap: 50px;
+    max-width: 1400px;    
+    margin: 0 auto 60px;  
+}
+
+.gallery-info h1 {
+    font-size: 3.2rem;
+    letter-spacing: 0.3rem;
+    margin-bottom: 20px;
+}
+
+.gallery-info p {
+    max-width: 420px;
+    color: #b5afa1;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.gallery-feature {
+    position: relative;
+    height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.gallery-feature img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.feature-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.65);
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.gallery-card {
+    position: relative;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(0,0,0,0.6);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.gallery-card,
+.gallery-feature {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-card img,
+.gallery-feature img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card-overlay,
+.feature-overlay {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: #e6e1d6;
+    z-index: 3;
+    opacity: 1;
+}
+
+.gallery-card::after,
+.gallery-feature::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 2;
+}
+
+.gallery-card:hover img,
+.gallery-feature:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-card:hover,
+.gallery-feature:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px rgba(0,0,0,0.65);
+}
+
+.gallery-card:hover::after,
+.gallery-feature:hover::after {
+    opacity: 1;
+}
+
+.create-log-btn {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.create-log-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.45);
+}

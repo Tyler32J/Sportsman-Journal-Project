@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #121212;
+    color: #e6e1d6;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("images/dark_woods.png");
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.admin-header {
+    padding: 2rem 4rem;
+    border-bottom: 1px solid #2a2a2a;
+    background: rgba(10,10,10,0.9);
+}
+
+.admin-header h1 {
+    font-family: "Merriweather", serif;
+    font-weight: 400;
+    font-size: 2.2rem;
+    color: #c49a5a;
+}
+
+.admin-container {
+    padding: 3rem 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: rgba(20,20,20,0.9);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.6);
+}
+
+.stat-card h2 {
+    font-size: 2.4rem;
+    font-family: "Merriweather", serif;
+    color: #c49a5a;
+}
+
+.stat-card p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    opacity: 0.85;
+}
+
+.admin-section {
+    margin-top: 4rem;
+}
+
+.admin-section h2 {
+    font-family: "Merriweather", serif;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #c49a5a;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(20,20,20,0.9);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th {
+    background: rgba(30,30,30,0.95);
+    text-align: left;
+    padding: 14px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: #b5afa1;
+}
+
+td {
+    padding: 14px;
+    border-top: 1px solid #2a2a2a;
+    font-size: 0.9rem;
+}
+
+tr:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+.admin-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.admin-btn.edit {
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+}
+
+.admin-btn.edit:hover {
+    background: #3a5f3a;
+}
+
+.admin-btn.delete {
+    background: #8b1e1e;
+    color: #fff;
+}
+
+.admin-btn.delete:hover {
+    background: #b32626;
+}

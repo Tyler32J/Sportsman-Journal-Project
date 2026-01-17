@@ -16,6 +16,18 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
+        
+    {% if form.instance.pk and log.picture %}
+        <div style="margin-bottom: 15px;">
+            <p>Current Image:</p>
+            <img src="{{ log.picture.url }}"
+                 style="max-width: 300px; border-radius: 8px;">
+            <p style="font-size: 0.85rem; opacity: 0.7;">
+                Upload a new image only if you want to replace this one
+            </p>
+        </div>
+    {% endif %}
+
         {{ form.as_p }}
 
         <button type="submit">Save</button>

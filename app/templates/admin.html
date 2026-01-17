@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Page{% endblock %}
+
+{% block css %} <link rel="stylesheet" href="{% static 'home.css' %}"> <link rel="stylesheet" href="{% static 'admin_page.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-header">
+    <h1>Admin Dashboard</h1>
+</div>
+
+<div class="admin-container">
+
+
+<div class="admin-stats">
+    <div class="stat-card">
+        <h2>{{ user_count }}</h2>
+        <p>Users</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ post_count }}</h2>
+        <p>Posts</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ hunting_count }}</h2>
+        <p>Hunts</p>
+    </div>
+    <div class="stat-card">
+        <h2>{{ fishing_count }}</h2>
+        <p>Fishing Logs</p>
+    </div>
+</div>
+
+<h2 class="admin-section-title">All Posts</h2>
+
+<table>
+    <tr>
+        <th>User</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for post in posts %}
+    <tr>
+        <td>{{ post.user.username }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.description }}</td>
+        <td>{{ post.date }}</td>
+        <td>
+            <a class="admin-btn edit"
+                     href="{% url 'admin_edit_post' post.id %}">
+                     Edit
+            </a>
+            <form method="post" action="{% url 'admin_delete_post' post.id %}">
+                {% csrf_token %}
+                <button type="submit" class="admin-btn delete">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No posts available.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2 class="admin-section-title">All Users</h2>
+
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Action</th>
+    </tr>
+
+    {% for user in users %}
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{% if user.is_superuser %}Yes{% else %}No{% endif %}</td>
+        <td>
+             <a class="admin-btn edit"
+               href="{% url 'admin_edit_user' user.id %}">
+               Edit
+            </a>
+            {% if not user.is_superuser %}
+            <form method="post" action="{% url 'admin_delete_user' user.id %}">
+                {% csrf_token %}
+                <button type="submit" class="admin-btn delete">
+                    Delete
+                </button>
+            </form>
+            {% else %}
+                —
+            {% endif %}
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No users found.</td>
+    </tr>
+    {% endfor %}
+</table>
+```
+
+</div>
+
+{% endblock %}

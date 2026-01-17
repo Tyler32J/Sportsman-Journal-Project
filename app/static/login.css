@@ -8,22 +8,36 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #141414;
-}
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
 
+background-image:
+    linear-gradient(
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.85)
+    ),
+    url("images/dark_woods.png");
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+
+}
 .wrapper {
     position: relative;
     width: 750px;
     height: 450px;
-    background: transparent;
-    border: 2px solid rgb(12, 115, 38);
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(12, 115, 38, 0.6);
     overflow: hidden;
-    box-shadow: 0 0 25px gray;
-    /* border-radius: 10%; */
+    
+    box-shadow:
+        0 0 15px rgba(12, 115, 38, 0.6),
+        0 0 35px rgba(12, 115, 38, 0.35),
+        0 0 70px rgba(0, 0, 0, 0.9);
 }
 
 .wrapper .form-box {
@@ -31,7 +45,6 @@ body {
     top: 0;
     width: 50%;
     height: 100%;
-    /* background: red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -211,7 +224,6 @@ color: rgb(12, 115, 38);
     top: 0;
     width: 50%;
     height: 100%;
-    /* background: red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -220,7 +232,7 @@ color: rgb(12, 115, 38);
 .wrapper .info-text.login {
     right: 0;
     text-align: right;
-    padding: 0 40px 60px 150px;    /*for the welcome*/
+    padding: 0 40px 60px 150px;  
 }
 
 .wrapper .info-text.login .animation {

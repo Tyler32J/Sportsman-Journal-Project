@@ -1,0 +1,314 @@
+.gallery-wrapper {
+    padding: 60px;
+    color: #e6e1d6;
+    font-family: 'Merriweather', serif;
+}
+
+.gallery-top {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    gap: 50px;
+    margin: 0 auto 60px auto;
+    max-width: 1400px;    
+}
+
+.gallery-info h1 {
+    font-size: 3.2rem;
+    letter-spacing: 0.3rem;
+    margin-bottom: 20px;
+}
+
+.gallery-info p {
+    max-width: 420px;
+    color: #b5afa1;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.gallery-feature {
+    position: relative;
+    height: 420px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.gallery-feature img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.feature-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.65);
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.gallery-grid {
+    display: grid;
+    max-width: 1800px;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+}
+
+.gallery-card {
+    position: relative;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    background: rgba(0,0,0,0.6);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    pointer-events: none;
+
+}
+
+.gallery-card,
+.gallery-feature {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.gallery-card img,
+.gallery-feature img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card-overlay,
+.feature-overlay {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    color: #e6e1d6;
+    opacity: 1; 
+}
+
+.card-actions {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+    pointer-events: auto;
+}
+
+.card-actions a,
+.card-actions button {
+    display: inline-flex;          
+    align-items: center;           
+    justify-content: center;      
+    min-width: 80px;               
+    height: 34px;                  
+    padding: 0 14px;               
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-btn {
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.edit-btn:hover {
+    background: #3a5f3a;
+}
+
+.delete-btn {
+    background: #8b1e1e;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #b32626;
+}
+
+.gallery-card::after,
+.gallery-feature::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.gallery-card:hover img,
+.gallery-feature:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-card:hover,
+.gallery-feature:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px rgba(0,0,0,0.65);
+}
+
+.gallery-card:hover::after,
+.gallery-feature:hover::after {
+    opacity: 1;
+}
+
+.create-log-btn {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    text-decoration: none; 
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.create-log-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.45);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 5000;
+}
+
+.modal .close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+
+    font-size: 2.2rem;
+    font-weight: bold;
+    line-height: 1;
+    padding: 6px 2vh;
+    color: #e6e1d6;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    
+}
+
+.modal .close:hover {
+    color: #c49a5a;       
+    transform: scale(1.15);
+}
+
+.modal-content {
+    background: #121212;
+    color: #e6e1d6;
+    max-width: 100vh;
+    height: fit-content;
+    margin: 6vh auto;
+    padding: 60px;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.modal-image {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.modal h2 {
+    margin-bottom: 10px;
+    color: #c49a5a;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-image::after {
+
+    content: "Click to preview";
+    position: absolute;
+
+    top: 4vh;         
+    left: 16px;
+    right: 16px;
+
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+
+}
+
+.gallery-card:hover .card-image::after {
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

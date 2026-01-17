@@ -19,6 +19,7 @@ class Post(models.Model):
     ('deer_mule', 'Mule/Black-tailed Deer'),
     ('elk', 'Elk'),
     ('moose', 'Moose'),
+    ('hog', 'Hog'),
     ('bear_black', 'Black Bear'),
     ('bighorn_sheep', 'Bighorn Sheep'),
     ('mountain_lion', 'Mountain Lion'),

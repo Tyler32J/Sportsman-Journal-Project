@@ -16,20 +16,14 @@
             <h1 class="Sportsman_journal">Sportsman's Journal</h1>
             
             <nav class="main-nav">
-                
-{% comment %} 
-            <select onchange="if (this.value) window.location.href=this.value;">
-                <option value="" selected>Logs</option>
-                <option value="{% url 'hunting' %}">Hunting Log</option>
-                <option value="{% url 'fishing' %}">Fishing Log</option>
-            </select> {% endcomment %}
-
                 <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'hunting' %}">Hunting</a>
                 <a href="{% url 'fishing' %}">Fishing</a>
                 <a href="{% url 'photo' %}">Photo Gallery</a>
                 <a href="{% url 'logout' %}">Logout</a>
-                <a href="{% url 'admin:index' %}">Settings</a>
+                {%if user.is_superuser%}
+                    <a href="{% url 'admin_dashboard' %}">Settings</a>
+                {%endif%}
             </nav>
         </div>
     </header>
@@ -82,15 +76,15 @@
 
             <section class="stats">
                 <div>
-                    <h2>25</h2>
+                    <h2>{{ hunts_count }}</h2>
                     <p>Hunts Logged</p>
                 </div>
                 <div>
-                    <h2>18</h2>
+                    <h2>{{ fish_count }}</h2>
                     <p>Fish Caught</p>
                 </div>
                 <div>
-                    <h2>42</h2>
+                    <h2>{{ photos_count }}</h2>
                     <p>Photos Uploaded</p>
                 </div>
             </section>
@@ -99,7 +93,7 @@
                 <div class="about-overlay">
                         <h2>About The Website</h2>
                         <p>
-                            Sportsman’s Journal is a personal field log designed
+                            Sportsman's Journal is a personal field log designed
                             for hunters and anglers who value accurate records and lasting memories. Log your hunts, record your
                             catches, and build a personal outdoor journal.
 
@@ -112,5 +106,6 @@
     <footer>
         <p></p>
     </footer>
+    <script src="{% static 'script.js' %}"></script>
 </body>
 </html> 

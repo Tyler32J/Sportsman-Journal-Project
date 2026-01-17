@@ -16,12 +16,12 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
-from django.urls import path
+# from django.contrib import admin
+from django.urls import path, include
 from app.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path("", login_signup, name="Login_sign_up"),
     path("logout/", logout_view, name="logout"),
     path("home/", home_page, name="home"),
@@ -37,6 +37,15 @@ urlpatterns = [
     path("fishing/edit/<int:id>/", edit_fishing_log, name="edit_fish"),
     path("post/edit/<int:id>/", edit_post, name="edit_post"),
     path("post/delete/<int:id>/", delete_post, name="delete_post"),
+    path("admin-dashboard/", admin_dashboard, name="admin_dashboard"),
+    path("admin/user/delete/<int:user_id>/", admin_delete_user, name="admin_delete_user"),
+    path("admin/user/password/<int:user_id>/", admin_change_password, name="admin_change_password"),
+    path("admin/post/delete/<int:post_id>/", admin_delete_post, name="admin_delete_post"),
+    path("admin/user/edit/<int:user_id>/", admin_edit_user, name="admin_edit_user"),
+    path("admin/post/edit/<int:post_id>/", admin_edit_post, name="admin_edit_post"),
+    path("admin/posts/", admin_post_list, name="admin_posts"),
+
+
 
 
     
