@@ -1,23 +1,91 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}
+{% block title %}Create Post{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'create_post.css' %}">
 {% endblock %}
+    {% block content %}
 
-{% block content %}
-    <h2>
-        {% if form.instance.pk %}
-            Edit Post
-        {% else %}
-            Create Post
-        {% endif %}
-    </h2>
+        <div class="create-log-card">
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+            <h1>Create Post</h1>
 
-        {{ form.as_p }}
+            <form method="POST" enctype="multipart/form-data" class="create-log-form">
+                {% csrf_token %}
 
-        <button type="submit">Save</button>
-    </form>
+                <div class="image-column">
+                    <div class="image-preview">
+                        <img id="previewImage"
+                            src="{% static 'images/placeholder.jpg' %}"
+                            alt="No Image Selected">
+                    </div>
+
+                    <label class="image-btn">
+                       Add Image Or Edit
+                        {{ form.picture }}
+                    </label>
+                    
+                </div>
+
+                <div class="fields-column">
+
+                    <div class="input-row">
+                        <span>📍</span>
+                        {{ form.location }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>🏷</span>
+                        {{ form.title }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>📅</span>
+                        {{ form.date }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>📝</span>
+                        {{ form.quantity }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>🎛</span>
+                        <select id="logTypeSelect">
+                            <option value="none">None</option>
+                            <option value="hunting">Hunting</option>
+                            <option value="fishing">Fishing</option>
+                        </select>
+                    </div>
+
+                    <div id="huntingGroup" class="stack hidden">
+                        <div class="input-row">
+                            <span>🎯</span>
+                            {{ form.hunting_choices }}
+                        </div>
+                    </div>
+
+                    <div id="fishingGroup" class="stack hidden">
+                        <div class="input-row">
+                            <span>🎣</span>
+                            {{ form.fishing_choices }}
+                        </div>
+                            <div class="input-row">
+                                <span>🌊</span>
+                                {{ form.fishing_zone_choices }}
+                            </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        Create Post
+                    </button>
+
+                </div>
+            </form>
+        </div>
+
+    
 {% endblock %}

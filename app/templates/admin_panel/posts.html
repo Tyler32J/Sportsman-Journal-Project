@@ -4,7 +4,7 @@
 {% block title %}Edit Post{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'home.css' %}">
+<link rel="stylesheet" href="{% static 'base.css' %}">
 <link rel="stylesheet" href="{% static 'admin_page.css' %}">
 {% endblock %}
 
@@ -21,10 +21,10 @@
             <input type="text" name="title" value="{{ post.title }}" required>
         </div>
 
-        <div class="form-group">
+        {% comment %} <div class="form-group">
             <label>Description</label>
             <textarea name="description">{{ post.description }}</textarea>
-        </div>
+        </div> {% endcomment %}
 
         <div class="form-group">
             <label>Image</label>

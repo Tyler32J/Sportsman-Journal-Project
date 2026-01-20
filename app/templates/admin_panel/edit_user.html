@@ -4,14 +4,14 @@
 {% block title %}Edit User{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'home.css' %}">
+<link rel="stylesheet" href="{% static 'base.css' %}">
 <link rel="stylesheet" href="{% static 'admin_page.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="admin-container">
 
-    <h1>Edit Admin</h1>
+    <h1>Edit User</h1>
 
     {% if user == request.user %}
         <p style="color: orange;">

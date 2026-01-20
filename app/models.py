@@ -10,11 +10,12 @@ class Post(models.Model):
     title = models.CharField(max_length=25)
     date = models.DateField()
     picture = models.ImageField(upload_to="images/")
-    description = models.CharField(max_length=25, blank=True)
+    # description = models.CharField(max_length=200, blank=True)
     quantity = models.PositiveIntegerField(default=0)
 
     GAME_CHOICES = [
     ('none','None'),
+    ('hog','Hog'),
     ('deer_whitetail', 'White-tailed Deer'),
     ('deer_mule', 'Mule/Black-tailed Deer'),
     ('elk', 'Elk'),
@@ -120,11 +121,12 @@ class Hunting(models.Model):
     title = models.CharField(max_length=25)
     date = models.DateField()
     picture = models.ImageField(upload_to="images/")
-    description = models.CharField(max_length=25, blank=True)
+    description = models.CharField(max_length=200, blank=True)
     quantity = models.PositiveIntegerField(default=0)
     
     GAME_CHOICES = [
     ('none','None'),
+    ('hog','Hog'),
     ('deer_whitetail', 'White-tailed Deer'),
     ('deer_mule', 'Mule/Black-tailed Deer'),
     ('elk', 'Elk'),
@@ -159,7 +161,7 @@ class Fishing(models.Model):
     title = models.CharField(max_length=25)
     date = models.DateField()
     picture = models.ImageField(upload_to="images/")
-    description = models.CharField(max_length=25, blank=True)
+    # description = models.CharField(max_length=200, blank=True)
     quantity = models.PositiveIntegerField(default=0)
 
     FISH_CHOICES = [

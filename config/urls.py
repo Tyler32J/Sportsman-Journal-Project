@@ -43,12 +43,7 @@ urlpatterns = [
     path("admin/post/delete/<int:post_id>/", admin_delete_post, name="admin_delete_post"),
     path("admin/user/edit/<int:user_id>/", admin_edit_user, name="admin_edit_user"),
     path("admin/post/edit/<int:post_id>/", admin_edit_post, name="admin_edit_post"),
-    path("admin/posts/", admin_post_list, name="admin_posts"),
-
-
-
-
-    
+    path("admin/posts/", admin_post_list, name="admin_posts") 
 ] 
 
 if settings.DEBUG:

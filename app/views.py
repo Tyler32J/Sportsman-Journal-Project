@@ -3,11 +3,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .forms import SignupForm
 from .forms import *
 from .models import *
 
 # @login_required
 def login_signup(request):
+    signup_form = SignupForm()
     if request.method == "POST":
         form_type = request.POST.get("form_type")
 
@@ -22,25 +24,19 @@ def login_signup(request):
                 return redirect("home")
             else:
                 messages.error(request, "Invalid username or password")
-                return redirect("Login_sign_up")
 
         if form_type == "signup":
-            username = request.POST.get("username")
-            password = request.POST.get("password1")
-            email = request.POST.get("email")
+            form = SignupForm(request.POST)
+            signup_form = SignupForm(request.POST)
 
-            if User.objects.filter(username=username).exists():
+            if form.is_valid():
+                user = signup_form.save()
+                login(request, user)
+                return redirect("home")
+            else:
                 return render(request, "login.html", {
-                    "error": "Username already exists"
-                })
-             
-            user = User.objects.create_user(
-                username=username,
-                password=password,
-                email=email
-            )
-            login(request, user)
-            return redirect("home")
+                    "signup_form": signup_form,
+                    "submitted_form": "signup"})
 
     return render(request, "login.html")
 
@@ -203,7 +199,7 @@ def create_post(request):
 @login_required
 def photo_page(request):
     posts = Post.objects.all().order_by('-date')
-    return render(request, "photo.html", {"posts": posts})
+    return render(request, "photo_gallery.html", {"posts": posts})
 
 @login_required
 def edit_post(request, id):
@@ -358,9 +354,9 @@ def admin_delete_user(request, user_id):
 
     if request.method == 'POST':
         user.delete()
-        return redirect('admin_users')
+        return redirect('admin_dashboard')
 
-    return render(request, 'Login_sign_up', {'user': user})
+    return render(request, 'admin_dashboard', {'user': user})
 
 @login_required
 def admin_post_list(request):
@@ -377,7 +373,7 @@ def admin_edit_post(request, post_id):
     if request.method == 'POST':
         post.title = request.POST.get('title')
         post.location = request.POST.get('location')
-        post.description = request.POST.get('description')
+        # post.description = request.POST.get('description')
         post.quantity = request.POST.get('quantity') or 0
 
         if request.FILES.get("picture"):
@@ -401,6 +397,6 @@ def admin_delete_post(request, post_id):
 
     if request.method == 'POST':
         post.delete()
-        return redirect('admin_posts')
+        return redirect('admin_dashboard')
 
     return render(request, 'admin_panel/confirm_delete_post.html', {'post': post})

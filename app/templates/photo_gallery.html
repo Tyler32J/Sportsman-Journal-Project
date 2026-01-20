@@ -4,8 +4,8 @@
 {% block title %}Photo Gallery{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'home.css' %}">
-<link rel="stylesheet" href="{% static 'photo-gallery.css' %}">
+<link rel="stylesheet" href="{% static 'base.css' %}">
+<link rel="stylesheet" href="{% static 'photo_gallery.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -39,9 +39,25 @@
     </div>
 
     <div class="gallery-grid">
+
         {% for post in posts|slice:"1:" %}
+
         <div class="gallery-card">
-            <img src="{{ post.picture.url }}">
+
+        {% if post.picture %}
+                <div class="card-image"
+                    onclick="openPostModal(
+                        '{{ post.user.username|escapejs }}',
+                        '{{ post.location|escapejs }}',
+                        '{{ post.date }}',
+                        '{{ post.quantity }}',
+                        '{{ post.get_hunting_log_choices_display }}',
+                        '{{ post.get_fishing_zone_choices_display }}',
+                        '{{ post.picture.url }}'
+                    )">
+                    <img src="{{ post.picture.url }}">
+                </div>   
+        {% endif %}
             <div class="card-overlay">
                 <strong>{{ post.user.username }}</strong><br>
                 {{ post.location }}
@@ -54,6 +70,19 @@
 
 </div>
 
+<div id="postModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePostModal()">&times;</span>
+
+        <img id="postModalImage" class="modal-image">
+
+        <h2 id="postModalUser"></h2>
+        <p id="postModalLocation"></p>
+        <p id="postModalType"></p>
+        <p id="postModalQuantity"></p>
+        <p id="postModalZone"></p> 
+        <p id="postModalDate"></p>
+    </div>
+</div>
 
 {% endblock %}
-

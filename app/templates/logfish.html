@@ -1,35 +1,74 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}
+{% block title %}Create Post{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'create_log.css' %}">
 {% endblock %}
+    {% block content %}
 
-{% block content %}
-    <h2>
-        {% if form.instance.pk %}
-            Edit Fishing Log
-        {% else %}
-            Create Fishing Log
-        {% endif %}
-    </h2>
+        <div class="create-log-card">
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+            <h1>Create Fishing Log</h1>
 
-        
-    {% if form.instance.pk and log.picture %}
-        <div style="margin-bottom: 15px;">
-            <p>Current Image:</p>
-            <img src="{{ log.picture.url }}"
-                 style="max-width: 300px; border-radius: 8px;">
-            <p style="font-size: 0.85rem; opacity: 0.7;">
-                Upload a new image only if you want to replace this one
-            </p>
+            <form method="POST" enctype="multipart/form-data" class="create-log-form">
+                {% csrf_token %}
+
+                <div class="image-column">
+                    <div class="image-preview">
+                        <img id="previewImage"
+                            src="{% static 'images/placeholder.jpg' %}"
+                            alt="No Image Selected">
+                    </div>
+
+                    <label class="image-btn">
+                       Add Image Or Edit
+                        {{ form.picture }}
+                    </label>
+                    
+                </div>
+
+                <div class="fields-column">
+
+                    <div class="input-row">
+                        <span>📍</span>
+                        {{ form.location }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>🏷</span>
+                        {{ form.title }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>📅</span>
+                        {{ form.date }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>📝</span>
+                        {{ form.quantity }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>🎣</span>
+                        {{ form.fishing_log_choices }}
+                    </div>
+
+                    <div class="input-row">
+                        <span>🌊</span>
+                        {{ form.fishing_zone_choices }}
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        Create Log
+                    </button>
+
+                </div>
+            </form>
         </div>
-    {% endif %}
 
-        {{ form.as_p }}
-
-        <button type="submit">Save</button>
-    </form>
+    
 {% endblock %}

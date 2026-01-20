@@ -4,8 +4,8 @@
 {% block title %}Hunting Log{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'home.css' %}">
-    <link rel="stylesheet" href="{% static 'loghunt.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'hunting.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -51,6 +51,7 @@
                             '{{ hunt.location|escapejs }}',
                             '{{ hunt.date }}',
                             '{{ hunt.get_hunting_log_choices_display }}',
+                            '{{ hunt.quantity }}',
                             '',
                             '{{ hunt.picture.url }}'
                         )">
@@ -62,6 +63,7 @@
                     <strong>{{ hunt.title }}</strong><br>
                     {{ hunt.location }}<br>
                     {{ hunt.get_hunting_log_choices_display }}<br>
+                    <strong>Quantity: {{ hunt.quantity }}</strong><br>
                     {{ hunt.date }}
                 </div>
 
@@ -96,6 +98,7 @@
         <h2 id="modalTitle"></h2>
         <p id="modalLocation"></p>
         <p id="modalType"></p>
+        <p id="modalQuantity"></p> 
         <p id="modalDate"></p>
     </div>
 </div>

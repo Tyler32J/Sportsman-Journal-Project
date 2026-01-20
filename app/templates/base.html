@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Sportsman's Journal{% endblock %}</title>
     {% block css %}
-        <link rel="stylesheet" href="{% static 'home.css' %}">
+        <link rel="stylesheet" href="{% static 'base.css' %}">
         <link href="https://fonts.googleapis.com/css2?family=Inter&family=Merriweather&display=swap" rel="stylesheet">
     {% endblock %}  
 </head>
@@ -68,7 +68,7 @@
 
                 <a href="{% url 'photo' %}" class="card photo_card">
                     <div class="card-content">
-                        <span>Galley</span>
+                        <span>Gallery</span>
                         <small>Share and browse outdoor photos</small>
                     </div>
                 </a>

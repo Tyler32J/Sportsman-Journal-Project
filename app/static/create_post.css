@@ -1,0 +1,161 @@
+.create-log-page {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-log-card {
+    width: 920px;
+    padding: 36px;
+    border-radius: 18px;
+    background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255,255,255,0.06);
+    margin: 5% auto;
+}
+
+.create-log-card h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.create-log-form {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 30px;
+}
+
+.image-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.image-preview {
+    width: 100%;
+    height: 260px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0b0b0b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cfcfcf;                    
+    font-size: 0.95rem;                
+    text-align: center;
+}
+
+.image-preview::before {
+    content: "No Image Selected";
+    position: absolute;
+     color: #cfcfcf;
+     font-size: 0.95rem;
+     text-align: center;
+     z-index: 1;
+ }
+
+.image-preview img {
+   display: none;
+   width: 0;
+   height: 0;
+}
+
+.image-preview img[src^="data:"] {
+     display: block;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+ }
+
+ .image-preview.has-image::before {
+     display: none;
+ }
+ 
+
+.image-btn {
+    background: #1c1c1c;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.image-btn input {
+    display: none;
+}
+
+.fields-column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #141414;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.input-row span {
+    opacity: 0.5;
+    width: 18px;
+    text-align: center;
+}
+
+.input-row input,
+.input-row select {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #eaeaea;
+    font-size: 0.9rem;
+}
+
+.input-row input:focus,
+.input-row select:focus {
+    outline: none;
+}
+
+.submit-btn {
+    margin-top: 18px;
+    align-self: center;
+    padding: 10px 36px;
+    background: #6f8757;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #7f9b63;
+}
+
+.form-card select,
+.input-row select {
+    background-color: #1a1a1a;
+    color: #eaeaea;
+}
+
+.form-card select option,
+.input-row select option {
+    background-color: #1a1a1a;
+    color: #eaeaea;
+}
+
+.hidden { display: none !important; }
+
+.stack > .input-row + .input-row { margin-top: 14px; }
+
+#huntingGroup.hidden,
+#fishingGroup.hidden {
+    display: none;
+}

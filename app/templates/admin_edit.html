@@ -5,7 +5,7 @@
 {% if edit %}Edit Fishing Log{% else %}Create Fishing Log{% endif %}
 {% endblock %}
 
-{% block css %} <link rel="stylesheet" href="{% static 'home.css' %}"> <link rel="stylesheet" href="{% static 'logfish.css' %}">
+{% block css %} <link rel="stylesheet" href="{% static 'base.css' %}"> <link rel="stylesheet" href="{% static 'logfish.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -36,11 +36,11 @@
         <label>Date</label>
         {{ form.date }}
     </div>
-
+{% comment %} 
     <div class="form-group">
         <label>Description</label>
         {{ form.description }}
-    </div>
+    </div> {% endcomment %}
 
     <div class="form-group">
         <label>Quantity</label>

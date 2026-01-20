@@ -4,8 +4,8 @@
 {% block title %}Fishing Log{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'home.css' %}">
-    <link rel="stylesheet" href="{% static 'logfish.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="{% static 'fishing.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -17,7 +17,7 @@
             <div class="gallery-info">
                 <h1>Fishing Log</h1>
                 <p>
-                Review and manage your Fishing logs.
+                Review and manage your fishing logs.
                     Each card represents a recorded fishing trip..
                 </p>
 
@@ -51,7 +51,8 @@
                             '{{ fish.location|escapejs }}',
                             '{{ fish.date }}',
                             '{{ fish.get_fishing_log_choices_display }}',
-                            '{{ fish.zone }}',
+                            '{{ fish.quantity }}',
+                            '{{ fish.get_fishing_zone_choices_display }}',
                             '{{ fish.picture.url }}'
                         )">
                         <img src="{{ fish.picture.url }}">
@@ -62,6 +63,7 @@
                     <strong>{{ fish.title }}</strong><br>
                     {{ fish.location }}<br>
                     {{ fish.get_fishing_log_choices_display }}<br>
+                    <strong>Quantity: {{ fish.quantity }}</strong><br>
                     {{ fish.date }}
                 </div>
 
@@ -96,6 +98,8 @@
         <h2 id="modalTitle"></h2>
         <p id="modalLocation"></p>
         <p id="modalType"></p>
+        <p id="modalQuantity"></p>
+        <p id="modalZone"></p> 
         <p id="modalDate"></p>
     </div>
 </div>

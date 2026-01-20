@@ -3,7 +3,7 @@
 
 {% block title %}Admin Page{% endblock %}
 
-{% block css %} <link rel="stylesheet" href="{% static 'home.css' %}"> <link rel="stylesheet" href="{% static 'admin_page.css' %}">
+{% block css %} <link rel="stylesheet" href="{% static 'base.css' %}"> <link rel="stylesheet" href="{% static 'admin_page.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -40,7 +40,7 @@
     <tr>
         <th>User</th>
         <th>Title</th>
-        <th>Description</th>
+        {% comment %} <th>Description</th> {% endcomment %}
         <th>Date</th>
         <th>Action</th>
     </tr>
@@ -49,7 +49,7 @@
     <tr>
         <td>{{ post.user.username }}</td>
         <td>{{ post.title }}</td>
-        <td>{{ post.description }}</td>
+        {% comment %} <td>{{ post.description }}</td> {% endcomment %}
         <td>{{ post.date }}</td>
         <td>
             <a class="admin-btn edit"
