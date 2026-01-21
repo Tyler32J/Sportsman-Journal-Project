@@ -100,9 +100,10 @@ def edit_hunting_log(request, id):
         if form.is_valid():
             log = form.save(commit=False)
              
-
             if "picture" in request.FILES:
                 log.picture = request.FILES["picture"]
+
+            log.save()
 
             messages.success(request, "Hunting log updated successfully.")
             return redirect("hunting")
@@ -159,10 +160,10 @@ def edit_fishing_log(request, id):
         if form.is_valid():
             log = form.save(commit=False)
             
-
-            
             if "picture" in request.FILES:
                 log.picture = request.FILES["picture"]
+
+            log.save()
 
             messages.success(request, "Fishing log updated successfully.")
             return redirect("fishing")
@@ -373,6 +374,7 @@ def admin_edit_post(request, post_id):
     if request.method == 'POST':
         post.title = request.POST.get('title')
         post.location = request.POST.get('location')
+        post.date = request.POST.get('date')
         # post.description = request.POST.get('description')
         post.quantity = request.POST.get('quantity') or 0
 

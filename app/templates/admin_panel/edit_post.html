@@ -27,6 +27,11 @@
             <input type="text" name="location" value="{{ post.location }}">
         </div>
 
+        <div class="form-group">
+            <label>Date</label>
+            <input type="date" name="date" value="{{ post.date|date:'Y-m-d' }}" required>
+        </div>
+
         {% comment %} <div class="form-group">
             <label>Description</label>
             <textarea name="description" required>{{ post.description }}</textarea>
