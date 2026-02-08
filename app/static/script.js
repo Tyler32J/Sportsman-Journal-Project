@@ -156,3 +156,72 @@ document.addEventListener("DOMContentLoaded", function () {
  
      logType.addEventListener("change", toggleGroups);
  });
+
+function rotateFeaturedImage() {
+    const featureDiv = document.querySelector('.gallery-feature');
+    if (!featureDiv) return; 
+
+    const allCards = Array.from(document.querySelectorAll('.gallery-card'));
+    if (allCards.length === 0) return;
+
+    const img = featureDiv.querySelector('img');
+    const overlay = featureDiv.querySelector('.feature-overlay');
+    
+    if (!overlay) return;
+
+    setInterval(() => {
+
+        const randomCard = allCards[Math.floor(Math.random() * allCards.length)];
+        
+        const imgSrc = randomCard.querySelector('.card-image img')?.src;
+        if (!imgSrc) return;
+        
+        let titleText = '';
+        let locationText = '';
+        
+        const cardInfo = randomCard.querySelector('.card-info');
+        if (cardInfo) {
+            
+            const h3 = cardInfo.querySelector('h3');
+            titleText = h3?.textContent?.trim() || '';
+            
+            const locationP = cardInfo.querySelector('p');
+            if (locationP) {
+                const fullText = locationP.textContent;
+                locationText = fullText.replace('Location:', '').trim();
+            }
+        }
+
+        if (imgSrc && titleText && locationText) {
+
+            const newImg = document.createElement('img');
+            newImg.src = imgSrc;
+            newImg.style.position = 'absolute';
+            newImg.style.top = '0';
+            newImg.style.left = '0';
+            newImg.style.width = '100%';
+            newImg.style.height = '100%';
+            newImg.style.objectFit = 'cover';
+            newImg.style.opacity = '0';
+            newImg.style.transition = 'opacity 2s ease-in-out';
+            
+            featureDiv.insertBefore(newImg, overlay);
+            
+            setTimeout(() => {
+                newImg.style.opacity = '1';
+            }, 50);
+            
+            setTimeout(() => {
+                img.src = imgSrc;
+                overlay.querySelector('strong').textContent = titleText;
+                const br = overlay.querySelector('br');
+                if (br.nextSibling) {
+                    br.nextSibling.nodeValue = locationText;
+                }
+                newImg.remove();
+            }, 2100);
+        }
+    }, 7000); 
+}
+
+document.addEventListener('DOMContentLoaded', rotateFeaturedImage);

@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import SignupForm
 from .forms import *
 from .models import *
+from django.db.models import Q
 
 # @login_required
 def login_signup(request):
@@ -59,8 +60,20 @@ def home_page(request):
 
 @login_required
 def hunting_page(request):
-    hunting = Hunting.objects.filter(user=request.user)
-    return render(request, "hunting.html", {"hunting": hunting})
+    hunting = Hunting.objects.filter(user=request.user).order_by('-date')
+    
+    search_query = request.GET.get('search', '')
+    if search_query:
+        hunting = hunting.filter(
+            Q(title__icontains=search_query) | 
+            Q(location__icontains=search_query) | 
+            Q(hunting_log_choices__icontains=search_query)
+        )
+    
+    return render(request, "hunting.html", {
+        "hunting": hunting,
+        "search_query": search_query
+    })
 
 @login_required
 def hunting_log(request):
@@ -92,7 +105,11 @@ def delete_hunting_log(request, id):
 
 @login_required
 def edit_hunting_log(request, id):
-    edit_hunt = get_object_or_404(Hunting, id=id, user=request.user)
+    if request.user.is_superuser:
+        edit_hunt = get_object_or_404(Hunting, id=id)
+    else:
+        edit_hunt = get_object_or_404(Hunting, id=id, user=request.user)
+
 
     if request.method == "POST":
         form = HuntingForm(request.POST, request.FILES, instance=edit_hunt)
@@ -119,8 +136,21 @@ def edit_hunting_log(request, id):
 
 @login_required
 def fishing_page(request):
-    fishing = Fishing.objects.filter(user=request.user)
-    return render(request, "fishing.html", {"fishing": fishing})
+    fishing = Fishing.objects.filter(user=request.user).order_by('-date')
+    
+    search_query = request.GET.get('search', '')
+    if search_query:
+        fishing = fishing.filter(
+            Q(title__icontains=search_query) | 
+            Q(location__icontains=search_query) | 
+            Q(fishing_log_choices__icontains=search_query) |
+            Q(fishing_zone_choices__icontains=search_query)
+        )
+    
+    return render(request, "fishing.html", {
+        "fishing": fishing,
+        "search_query": search_query
+    })
 
 @login_required
 def fishing_log(request):
@@ -152,7 +182,11 @@ def delete_fishing_log(request, id):
 
 @login_required
 def edit_fishing_log(request, id):
-    edit_fish = get_object_or_404(Fishing, id=id, user=request.user)
+    if request.user.is_superuser:
+        edit_fish = get_object_or_404(Fishing, id=id)
+    else:
+        edit_fish = get_object_or_404(Fishing, id=id, user=request.user)
+
 
     if request.method == "POST":
         form = FishingForm(request.POST, request.FILES, instance=edit_fish)
@@ -199,8 +233,26 @@ def create_post(request):
 
 @login_required
 def photo_page(request):
+    import random
     posts = Post.objects.all().order_by('-date')
-    return render(request, "photo_gallery.html", {"posts": posts})
+    
+    filter_type = request.GET.get('filter', 'all')
+    if filter_type == 'hunting':
+        posts = posts.filter(hunting_choices__isnull=False).exclude(hunting_choices='none')
+    elif filter_type == 'fishing':
+        posts = posts.filter(fishing_choices__isnull=False).exclude(fishing_choices='none')
+    
+    search_query = request.GET.get('search', '')
+    if search_query:
+        posts = posts.filter(location__icontains=search_query) | posts.filter(user__username__icontains=search_query)
+    
+    featured_post = random.choice(posts) if posts.exists() else None
+    return render(request, "photo_gallery.html", {
+        "posts": posts, 
+        "featured_post": featured_post,
+        "search_query": search_query,
+        "filter_type": filter_type
+    })
 
 @login_required
 def edit_post(request, id):
@@ -265,15 +317,70 @@ def admin_dashboard(request):
     if not request.user.is_superuser:
         return redirect("home")
 
+    all_users = User.objects.all().order_by("username")
+    all_posts = Post.objects.all().order_by("-date")
+    
+    filter_type = request.GET.get('filter', 'all')
+    search_query = request.GET.get('search', '')
+    
+    if search_query:
+        if filter_type == 'users':
+            all_users = all_users.filter(
+                Q(username__icontains=search_query) | 
+                Q(email__icontains=search_query)
+            )
+            all_posts = Post.objects.none()  
+        elif filter_type == 'posts':
+            all_posts = all_posts.filter(
+                Q(title__icontains=search_query) | 
+                Q(location__icontains=search_query) |
+                Q(user__username__icontains=search_query)
+            )
+            all_users = User.objects.none() 
+        else:  
+            all_users = all_users.filter(
+                Q(username__icontains=search_query) | 
+                Q(email__icontains=search_query)
+            )
+            all_posts = all_posts.filter(
+                Q(title__icontains=search_query) | 
+                Q(location__icontains=search_query) |
+                Q(user__username__icontains=search_query)
+            )
+    elif filter_type == 'users':
+        all_posts = Post.objects.none()  
+    elif filter_type == 'posts':
+        all_users = User.objects.none()  
+
     context = {
         "user_count": User.objects.count(),
         "post_count": Post.objects.count(),
         "hunting_count": Hunting.objects.count(),
         "fishing_count": Fishing.objects.count(),
-        "users": User.objects.all().order_by("username"),
-        "posts": Post.objects.all().order_by("-date"),
+        "users": all_users,
+        "posts": all_posts,
+        "search_query": search_query,
+        "filter_type": filter_type,
     }
     return render(request, "admin.html", context)
+
+@login_required
+@user_passes_test(is_admin)
+def admin_user_detail(request, user_id):
+    target_user = get_object_or_404(User, id=user_id)
+    posts = Post.objects.filter(user=target_user).order_by('-date')
+    hunting_logs = Hunting.objects.filter(user=target_user).order_by('-date')
+    fishing_logs = Fishing.objects.filter(user=target_user).order_by('-date')
+    return render(
+        request,
+        "admin_panel/user_detail.html",
+        {
+            "target_user": target_user,
+            "posts": posts,
+            "hunting_logs": hunting_logs,
+            "fishing_logs": fishing_logs,
+        },
+    )
 
 @login_required
 def admin_create_user(request):
@@ -330,6 +437,7 @@ def admin_edit_user(request, user_id):
         'admin_panel/edit_user.html',
         {'user': user}
     )
+
 @login_required
 @user_passes_test(is_admin)
 def admin_change_password(request, user_id):
@@ -375,7 +483,6 @@ def admin_edit_post(request, post_id):
         post.title = request.POST.get('title')
         post.location = request.POST.get('location')
         post.date = request.POST.get('date')
-        # post.description = request.POST.get('description')
         post.quantity = request.POST.get('quantity') or 0
 
         if request.FILES.get("picture"):

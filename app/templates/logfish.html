@@ -11,16 +11,18 @@
 
         <div class="create-log-card">
 
-            <h1>Create Fishing Log</h1>
+            <h1>{% if edit %}Edit Hunting Log{% else %}Create Hunting Log{% endif %}</h1>
 
             <form method="POST" enctype="multipart/form-data" class="create-log-form">
                 {% csrf_token %}
 
                 <div class="image-column">
-                    <div class="image-preview">
-                        <img id="previewImage"
-                            src="{% static 'images/placeholder.jpg' %}"
-                            alt="No Image Selected">
+                    <div class="image-preview {% if edit and log.picture %}has-image{% endif %}">"
+                            <img id="previewImage"
+                            src="{% if edit and log.picture %}{{ log.picture.url }}{% else %}{% static 'images/placeholder.jpg' %}{% endif %}"
+                            alt="{% if edit and log.picture %}Current Image{% else %}No Image Selected{% endif %}"
+                            style="{% if edit and log.picture %}display:block;width:100%;height:100%;object-fit:cover;{% endif %}">
+                   
                     </div>
 
                     <label class="image-btn">
@@ -62,9 +64,12 @@
                         {{ form.fishing_zone_choices }}
                     </div>
                     
-                    <button type="submit" class="submit-btn">
-                        Create Log
-                    </button>
+                    <div style="display:flex;gap:12px;align-items:center;margin-top:10px;">
+                        <button type="submit" class="submit-btn" style="margin-top:0;">
+                            {% if edit %}Update Log{% else %}Create Log{% endif %}
+                        </button>
+                        <button type="button" onclick="window.location.href='{% url 'fishing' %}'" class="cancel-btn" style="margin-top:0;">Cancel</button>
+                    </div>
 
                 </div>
             </form>

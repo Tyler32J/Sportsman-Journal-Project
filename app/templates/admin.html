@@ -40,7 +40,6 @@
     <tr>
         <th>User</th>
         <th>Title</th>
-        {% comment %} <th>Description</th> {% endcomment %}
         <th>Date</th>
         <th>Action</th>
     </tr>
@@ -49,7 +48,6 @@
     <tr>
         <td>{{ post.user.username }}</td>
         <td>{{ post.title }}</td>
-        {% comment %} <td>{{ post.description }}</td> {% endcomment %}
         <td>{{ post.date }}</td>
         <td>
             <a class="admin-btn edit"
@@ -87,6 +85,7 @@
         <td>{{ user.email }}</td>
         <td>{% if user.is_superuser %}Yes{% else %}No{% endif %}</td>
         <td>
+            <a class="admin-btn edit" href="{% url 'admin_user_detail' user.id %}">View</a>
              <a class="admin-btn edit"
                href="{% url 'admin_edit_user' user.id %}">
                Edit
@@ -109,8 +108,33 @@
     </tr>
     {% endfor %}
 </table>
-```
 
+<div class="admin-search-section">
+    <h2>Search & Filter</h2>
+    
+    <div class="admin-filters">
+        <div class="search-box">
+            <form method="GET" class="search-form">
+                <input 
+                    type="text" 
+                    name="search" 
+                    placeholder="Search by username, email, title, or location..." 
+                    value="{{ search_query }}"
+                    class="search-input"
+                >
+                <input type="hidden" name="filter" value="{{ filter_type }}">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+
+        <div class="filter-buttons">
+            <a href="?filter=all" class="filter-btn {% if filter_type == 'all' or filter_type == '' %}active{% endif %}">All</a>
+            <a href="?filter=posts" class="filter-btn {% if filter_type == 'posts' %}active{% endif %}">Posts</a>
+            <a href="?filter=users" class="filter-btn {% if filter_type == 'users' %}active{% endif %}">Users</a>
+        </div>
+    </div>
+</div>
+```
 </div>
 
 {% endblock %}

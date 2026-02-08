@@ -11,16 +11,18 @@
 
         <div class="create-log-card">
 
-            <h1>Create Post</h1>
+            <h1>{% if edit %}Edit Post{% else %}Create Post{% endif %}</h1>
+
 
             <form method="POST" enctype="multipart/form-data" class="create-log-form">
                 {% csrf_token %}
 
                 <div class="image-column">
-                    <div class="image-preview">
+                    <div class="image-preview {% if edit and edit_post.picture %}has-image{% endif %}">
                         <img id="previewImage"
-                            src="{% static 'images/placeholder.jpg' %}"
-                            alt="No Image Selected">
+                        src="{% if edit and edit_post.picture %}{{ edit_post.picture.url }}{% else %}{% static 'images/placeholder.jpg' %}{% endif %}"
+                        alt="{% if edit and edit_post.picture %}Current Image{% else %}No Image Selected{% endif %}"
+                        style="{% if edit and edit_post.picture %}display:block;width:100%;height:100%;object-fit:cover;{% endif %}">
                     </div>
 
                     <label class="image-btn">
@@ -79,13 +81,14 @@
                             </div>
                     </div>
                     
-                    <button type="submit" class="submit-btn">
-                        Create Post
+                <div style="display:flex;gap:12px;align-items:center;margin-top:10px;">
+                    <button type="submit" class="submit-btn" style="margin-top:0;">
+                        {% if edit %}Update Post{% else %}Create Post{% endif %}
                     </button>
+                    <button type="button" onclick="window.location.href='{% url 'photo' %}'" class="cancel-btn" style="margin-top:0;">Cancel</button>
+                </div>
 
                 </div>
             </form>
         </div>
-
-    
 {% endblock %}

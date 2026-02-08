@@ -150,3 +150,39 @@
     background-color: #1a1a1a;
     color: #eaeaea;
 }
+
+.cancel-btn {
+    margin-top: 18px;
+    align-self: center;
+    padding: 10px 36px;
+    background: #8b1e1e;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cancel-btn:hover {
+    background: #b32626;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.2);
+    cursor: pointer;
+}
+
+input[type="number"] {
+    position: relative;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    filter: invert(1) brightness(1.2);
+    opacity: 1;
+    display: block;
+    background: transparent;
+    border: none;
+}

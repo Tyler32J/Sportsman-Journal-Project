@@ -139,6 +139,24 @@
     background: #7f9b63;
 }
 
+.cancel-btn {
+    margin-top: 18px;
+    align-self: center;
+    padding: 10px 36px;
+    background: #8b1e1e;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cancel-btn:hover {
+    background: #b32626;
+}
+
 .form-card select,
 .input-row select {
     background-color: #1a1a1a;

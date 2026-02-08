@@ -22,17 +22,17 @@
     <form method="post">
         {% csrf_token %}
 
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username" value="{{ user.username }}" required>
+        <div class="input-row">
+            <span>👤</span>
+            <input type="text" name="username" value="{{ user.username }}" placeholder="Username" required>
         </div>
 
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" value="{{ user.email }}">
+        <div class="input-row">
+            <span>📧</span>
+            <input type="email" name="email" value="{{ user.email }}" placeholder="Email">
         </div>
 
-        <div class="form-group">
+        <div class="input-row">
             <label>
                 <input type="checkbox" name="is_staff"
                        {% if user.is_staff %}checked{% endif %}
@@ -41,7 +41,7 @@
             </label>
         </div>
 
-        <div class="form-group">
+        <div class="input-row">
             <label>
                 <input type="checkbox" name="is_superuser"
                        {% if user.is_superuser %}checked{% endif %}
@@ -50,7 +50,7 @@
             </label>
         </div>
 
-        <div class="form-group">
+        <div class="input-row">
             <label>
                 <input type="checkbox" name="is_active"
                        {% if user.is_active %}checked{% endif %}
@@ -59,14 +59,14 @@
             </label>
         </div>
 
-        <button type="submit" class="admin-btn edit">
-            Save Changes
-        </button>
-
-        <a href="{% url 'admin_dashboard' %}" class="admin-btn">
-            Cancel
-        </a>
+        <div style="display:flex;gap:12px;align-items:center;margin-top:10px;">
+            <button type="submit" class="admin-submit-btn" style="margin-top:0;">
+                Save Changes
+            </button>
+            <button type="button" onclick="window.location.href='{% url 'admin_dashboard' %}'" class="admin-btn cancel" style="margin-top:0;">Cancel</button>
+        </div>
     </form>
 
 </div>
 {% endblock %}
+

@@ -32,9 +32,10 @@ body::before {
 }
 
 .admin-container {
-    padding: 3rem 4rem;
+    padding: 3rem 4rem 6rem 4rem;
     max-width: 1600px;
     margin: 0 auto;
+    min-height: 70vh;
 }
 .admin-stats {
     display: grid;
@@ -81,6 +82,7 @@ table {
     background: rgba(20,20,20,0.9);
     border-radius: 14px;
     overflow: hidden;
+    min-height: 200px; 
 }
 
 th {
@@ -109,6 +111,7 @@ tr:hover {
     border: none;
     cursor: pointer;
     font-family: inherit;
+    text-decoration: none;
 }
 
 .admin-btn.edit {
@@ -128,3 +131,231 @@ tr:hover {
 .admin-btn.delete:hover {
     background: #b32626;
 }
+
+.admin-submit-btn {
+    margin-top: 18px;
+    align-self: center;
+    padding: 10px 36px;
+    background: #6f8757;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.admin-submit-btn:hover {
+    background: #7f9b63;
+}
+
+.admin-btn.cancel {
+   margin-top: 18px;
+    align-self: center;
+    padding: 10px 36px;
+    background: #8b1e1e;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.admin-btn.cancel:hover {
+    background: #b32626;
+}
+
+.admin-btn.back {
+    background: #c49a5a;
+    color: #121212;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.admin-btn.back:hover {
+    background: #e0b970;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.2);
+    cursor: pointer;
+}
+
+input[type="number"] {
+    position: relative;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    filter: invert(1) brightness(1.2);
+    opacity: 1;
+    display: block;
+    background: transparent;
+    border: none;
+}
+
+/* this is for the edit user css. Need to make a separate file*/
+
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #141414;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 14px;
+}
+
+.input-row input[type="text"],
+.input-row input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #eaeaea;
+    font-size: 0.9rem;
+}
+
+.input-row input[type="text"]:focus,
+.input-row input[type="email"]:focus {
+    outline: none;
+}
+
+.input-row label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    color: #eaeaea;
+}
+
+.input-row input[type="checkbox"] {
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.2);
+    cursor: pointer;
+}
+
+input[type="number"] {
+    position: relative;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    filter: invert(1) brightness(1.2);
+    opacity: 1;
+    display: block;
+    background: transparent;
+    border: none;
+}
+
+/* end of edit user css */
+
+/* Start of the search bar css */
+.admin-search-section {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid #2a2a2a;
+}
+
+.admin-search-section h2 {
+    font-family: "Merriweather", serif;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: #c49a5a;
+}
+
+.admin-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(30,30,30,0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(196,154,90,0.2);
+    max-width: 800px;
+}
+
+.search-box {
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 15px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid #c49a5a;
+    border-radius: 8px;
+    color: #e6e1d6;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: #888;
+}
+
+.search-input:focus {
+    outline: none;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 8px rgba(196,154,90,0.3);
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background: #c49a5a;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: #d4a970;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(196,154,90,0.3);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid #666;
+    border-radius: 8px;
+    color: #e6e1d6;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: #c49a5a;
+    color: #c49a5a;
+}
+
+.filter-btn.active {
+    background: #c49a5a;
+    color: #1a1a1a;
+    border-color: #c49a5a;
+}
+/* end of the search bar */
+
