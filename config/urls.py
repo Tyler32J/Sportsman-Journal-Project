@@ -45,11 +45,8 @@ urlpatterns = [
     path("admin/post/edit/<int:post_id>/", admin_edit_post, name="admin_edit_post"),
     path("admin/posts/", admin_post_list, name="admin_posts"),
     path("admin/user/<int:user_id>/", admin_user_detail, name="admin_user_detail"), 
-] 
-
-if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT
-    )
+] + static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
+)
  
