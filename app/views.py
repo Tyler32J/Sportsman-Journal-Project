@@ -56,7 +56,7 @@ def home_page(request):
         'fish_count': fish_count,
         'photos_count': photos_count,
     }
-    return render(request, "base.html", context)
+    return render(request, "index.html", context)
 
 @login_required
 def hunting_page(request):

@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 {% load static %}
 
 {% block title %}
 {% if edit %}Edit Fishing Log{% else %}Create Fishing Log{% endif %}
 {% endblock %}
 
-{% block css %} <link rel="stylesheet" href="{% static 'base.css' %}"> <link rel="stylesheet" href="{% static 'logfish.css' %}">
+{% block css %} <link rel="stylesheet" href="{% static 'index.css' %}"> <link rel="stylesheet" href="{% static 'logfish.css' %}">
 {% endblock %}
 
 {% block content %}
