@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 # from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from app.views import *
 
 urlpatterns = [
@@ -45,8 +46,12 @@ urlpatterns = [
     path("admin/post/edit/<int:post_id>/", admin_edit_post, name="admin_edit_post"),
     path("admin/posts/", admin_post_list, name="admin_posts"),
     path("admin/user/<int:user_id>/", admin_user_detail, name="admin_user_detail"), 
-] + static(
-    settings.MEDIA_URL,
-    document_root=settings.MEDIA_ROOT
-)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    ]
  

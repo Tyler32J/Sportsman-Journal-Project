@@ -139,4 +139,10 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = Path(config('MEDIA_ROOT', default=str(BASE_DIR / 'media')))
+
+RAILWAY_VOLUME_MOUNT_PATH = config('RAILWAY_VOLUME_MOUNT_PATH', default='')
+if RAILWAY_VOLUME_MOUNT_PATH:
+    MEDIA_ROOT = Path(RAILWAY_VOLUME_MOUNT_PATH) / 'media'
+
+os.makedirs(MEDIA_ROOT, exist_ok=True)
